@@ -3,12 +3,17 @@ import Header from './src/components/Header';
 import {StyleSheet, View, Image} from 'react-native';
 import Body from './src/components/Body';
 import MainContent from './src/components/MainContent';
+import JobDetail from './src/components/JobDetail';
+import JobList from './src/components/JobList';
+import JobListing from './src/components/JobListing';
 function App() {
   return (
     <View style={styles.container}>
-      <Header />
+      {/* <Header />
       <MainContent/>
-      <Body/>
+      <Body/> */}
+      {/* <JobDetail/> */}
+      {/* <JobListing/> */}
     </View>
   );
 }
