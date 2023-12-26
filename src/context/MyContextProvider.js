@@ -12,7 +12,7 @@ const MyContextProvider = ({children}) => {
   const updateData = newData => {
     SetData(newData);
   };
-  // console.warn("context",data);
+  //console.warn("context",data);
 
   return (
     <MyContext.Provider

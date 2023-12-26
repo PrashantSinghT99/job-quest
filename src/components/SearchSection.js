@@ -5,6 +5,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  // TouchableWithoutFeedback,
+  // Keyboard 
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {buttonData} from '../../assets/data';
@@ -14,6 +16,7 @@ const SearchSection = () => {
     <View style={styles.container}>
       <Text style={styles.headingOne}>Hello Prashant</Text>
       <Text style={styles.headingTwo}>Find your perfect job</Text>
+      {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
       <View style={styles.search}>
         <TextInput
           editable
@@ -21,6 +24,7 @@ const SearchSection = () => {
           style={styles.searchBox}
           placeholder="What are you looking for?"
         />
+        
         <FontAwesome
           name={'search'}
           size={24}
@@ -28,6 +32,7 @@ const SearchSection = () => {
           style={styles.searchIcon}
         />
       </View>
+      {/* </TouchableWithoutFeedback> */}
       <View style={styles.buttonList}>
         {buttonData.map(button => (
           <TouchableOpacity style={styles.button} key={button.id}>

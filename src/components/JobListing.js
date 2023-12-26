@@ -1,13 +1,15 @@
-import React from 'react';
+import React ,{useContext}from 'react';
 import {jobData} from '../../assets/data';
 import {View, ScrollView,StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import NearByJobs from './NearByJobs';
-const JobListing = ({data}) => {
+import MyContext from '../context/MyContextProvider';
+const JobListing = () => {
+  const {data} = useContext(MyContext);
+  // console.warn(data);
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        <Feather name={'arrow-left'} size={24} color="black" />
         <Feather name={'share-2'} size={24} color="black" />
       </View>
       <View>
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     },
     head:{
         flexDirection:'row',
-        justifyContent:'space-between',
+        justifyContent:'flex-end',
         marginTop:10,
         padding:10
     },})

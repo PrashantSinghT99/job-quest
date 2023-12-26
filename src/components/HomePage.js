@@ -5,7 +5,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import Header from './Header';
 import useFetch from '../hook/useFetch';
 import MyContext from '../context/MyContextProvider';
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   const {updateData} = useContext(MyContext);
   const {data, isLoading, error} = useFetch('search', {
     query: 'React developer',
@@ -19,7 +19,7 @@ const HomePage = () => {
     <View style={styles.homePageContainer}>
       <Header />
       <SearchSection />
-      <PopularJobs isLoading={isLoading} />
+      <PopularJobs isLoading={isLoading} navigation={navigation} />
     </View>
   );
 };

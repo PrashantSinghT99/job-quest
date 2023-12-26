@@ -5,30 +5,18 @@ import JobDetail from './src/components/JobDetail';
 import JobListing from './src/components/JobListing';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {MyContextProvider} from './src/context/MyContextProvider'
+import {MyContextProvider} from './src/context/MyContextProvider';
 const Stack = createNativeStackNavigator();
 function App() {
-
-  //console.warn(data);
-  // return (
-
-  //   <View style={styles.container}>
-  //     {/* <HomePage data={data} isLoading={isLoading}/> */}
-  //     {/* <JobDetail/> */}
-  //     {/* <JobListing data={data}/> */}
-  //   </View>
-  // );
- 
- 
   return (
     <MyContextProvider>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomePage">
-        <Stack.Screen name="HomePage" component={HomePage}/>
-        <Stack.Screen name="JobDetail" component={JobDetail} />
-        <Stack.Screen name="JobListing" component={JobListing} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="HomePage">
+          <Stack.Screen name="HomePage" component={HomePage} />
+          <Stack.Screen name="JobDetail" component={JobDetail} />
+          <Stack.Screen name="JobListing" component={JobListing} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </MyContextProvider>
   );
 }

@@ -1,12 +1,18 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import SectionHeading from './SectionHeading';
 import Card from './Card';
 import {bodyHeading} from '../../assets/data';
 import NearByJobs from './NearByJobs';
 import {ActivityIndicator} from 'react-native';
 import MyContext from '../context/MyContextProvider';
-const PopularJobs = ({isLoading}) => {
+const PopularJobs = ({isLoading, navigation }) => {
   const {data} = useContext(MyContext);
 
   return (
@@ -21,13 +27,17 @@ const PopularJobs = ({isLoading}) => {
         <View style={styles.cards}>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             {data?.map(job => (
-              <Card
+              <TouchableOpacity
                 key={job?.job_id}
-                name={job?.employer_name}
-                position={job?.job_title}
-                location={job?.job_country}
-                icon={job?.employer_logo}
-              />
+                onPress={() => navigation.navigate('JobDetail',{job:job})}>
+                <Card
+                  key={job?.job_id}
+                  name={job?.employer_name}
+                  position={job?.job_title}
+                  location={job?.job_country}
+                  icon={job?.employer_logo}
+                />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
@@ -41,11 +51,15 @@ const PopularJobs = ({isLoading}) => {
       ) : (
         <ScrollView showsVerticalScrollIndicator={false}>
           {data?.map(job => (
+             <TouchableOpacity
+             key={`NearByJobs-${job.job_id}`}
+             onPress={() => navigation.navigate('JobDetail',{job:job})}>
             <NearByJobs
               key={`NearByJobs-${job.job_id}`}
               position={job.job_title}
               jobType={job.job_employment_type}
             />
+               </TouchableOpacity>
           ))}
         </ScrollView>
       )}
