@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image,StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const JobDetail = () => {
+  //take the id then make request to job detail api
   return (
     <View style={styles.container}>
       <View style={styles.head}>

@@ -1,28 +1,43 @@
 import React from 'react';
-import Header from './src/components/Header';
 import {StyleSheet, View, Image} from 'react-native';
-import Body from './src/components/Body';
-import MainContent from './src/components/MainContent';
+import HomePage from './src/components/HomePage';
 import JobDetail from './src/components/JobDetail';
-import JobList from './src/components/JobList';
 import JobListing from './src/components/JobListing';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {MyContextProvider} from './src/context/MyContextProvider'
+const Stack = createNativeStackNavigator();
 function App() {
+
+  //console.warn(data);
+  // return (
+
+  //   <View style={styles.container}>
+  //     {/* <HomePage data={data} isLoading={isLoading}/> */}
+  //     {/* <JobDetail/> */}
+  //     {/* <JobListing data={data}/> */}
+  //   </View>
+  // );
+ 
+ 
   return (
-    <View style={styles.container}>
-      {/* <Header />
-      <MainContent/>
-      <Body/> */}
-      {/* <JobDetail/> */}
-      {/* <JobListing/> */}
-    </View>
+    <MyContextProvider>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="HomePage">
+        <Stack.Screen name="HomePage" component={HomePage}/>
+        <Stack.Screen name="JobDetail" component={JobDetail} />
+        <Stack.Screen name="JobListing" component={JobListing} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </MyContextProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#F6F6F6',
-    fontFamily: 'Roboto-Black'
+    backgroundColor: '#F6F6F6',
+    fontFamily: 'Roboto-Black',
   },
 });
 

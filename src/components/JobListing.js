@@ -2,8 +2,8 @@ import React from 'react';
 import {jobData} from '../../assets/data';
 import {View, ScrollView,StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import JobList from './JobList';
-const JobListing = () => {
+import NearByJobs from './NearByJobs';
+const JobListing = ({data}) => {
   return (
     <View style={styles.container}>
       <View style={styles.head}>
@@ -12,11 +12,11 @@ const JobListing = () => {
       </View>
       <View>
         <ScrollView>
-          {jobData.map(job => (
-            <JobList
-              key={job.id}
-              position={job.position}
-              jobType={job.jobType}
+          {data?.map(job => (
+            <NearByJobs
+              key={job.job_id}
+              position={job.job_title}
+              jobType={job.job_employment_type}
             />
           ))}
         </ScrollView>

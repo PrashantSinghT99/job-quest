@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,12 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {buttonData} from '../../assets/data';
-const MainContent = () => {
+
+const SearchSection = () => {
   return (
-    <View style={styles.maincontent}>
-      <Text style={styles.textOne}>Hello Prashant</Text>
-      <Text style={styles.textTwo}>Find your perfect job</Text>
+    <View style={styles.container}>
+      <Text style={styles.headingOne}>Hello Prashant</Text>
+      <Text style={styles.headingTwo}>Find your perfect job</Text>
       <View style={styles.search}>
         <TextInput
           editable
@@ -39,14 +40,14 @@ const MainContent = () => {
 };
 
 const styles = StyleSheet.create({
-  maincontent: {
-    padding: 20,
+  container: {
+    padding: 8,
   },
-  textOne: {
+  headingOne: {
+    fontSize: 18,
+  },
+  headingTwo: {
     fontSize: 20,
-  },
-  textTwo: {
-    fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
   },
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchBox: {
-    padding: 10,
+    padding: 8,
     backgroundColor: '#EBEBEB',
     borderRadius: 20,
     marginTop: 15,
@@ -73,13 +74,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    alignItems:'center',
-    padding: 8,
+    alignItems: 'center',
+    padding: 4,
     borderRadius: 20,
     borderWidth: 3,
-    borderColor: '#EBEBEB', 
+    borderColor: '#EBEBEB',
     marginTop: 10,
-    width:'30%'
+    width: '30%',
   },
 });
-export default MainContent;
+export default SearchSection;

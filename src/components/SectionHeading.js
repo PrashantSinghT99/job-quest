@@ -13,7 +13,7 @@ const styles=StyleSheet.create({
     bodyHeading: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        padding: 15,
+        padding: 10,
         alignItems: 'center',
       },
       popular: {
@@ -22,7 +22,7 @@ const styles=StyleSheet.create({
         color: 'black',
       },
       showAll:{
-        fontSize: 15,
+        fontSize: 12,
       }
 })
 export default SectionHeading
