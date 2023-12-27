@@ -18,7 +18,7 @@ const HomePage = ({navigation}) => {
   return (
     <View style={styles.homePageContainer}>
       <Header />
-      <SearchSection />
+      <SearchSection navigation={navigation}/>
       <PopularJobs isLoading={isLoading} navigation={navigation} />
     </View>
   );

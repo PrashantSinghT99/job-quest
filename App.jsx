@@ -22,11 +22,11 @@ function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F6F6F6',
-    fontFamily: 'Roboto-Black',
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: '#F6F6F6',
+  //   fontFamily: 'Roboto-Black',
+  // },
 });
 
 export default App;

@@ -6,12 +6,20 @@ import {
   TextInput,
   TouchableOpacity,
   // TouchableWithoutFeedback,
-  // Keyboard 
+  // Keyboard
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {buttonData} from '../../assets/data';
 
-const SearchSection = () => {
+const SearchSection = ({navigation}) => {
+  const [query, setQuery] = useState('');
+
+  const handleQuerySearch = () => {
+    if (query) {
+      navigation.navigate('JobListing', {query: query});
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.headingOne}>Hello Prashant</Text>
@@ -23,14 +31,17 @@ const SearchSection = () => {
           maxLength={40}
           style={styles.searchBox}
           placeholder="What are you looking for?"
+          value={query}
+          onChangeText={text => setQuery(text)}
         />
-        
-        <FontAwesome
-          name={'search'}
-          size={24}
-          color="black"
-          style={styles.searchIcon}
-        />
+        <TouchableOpacity onPress={handleQuerySearch}>
+          <FontAwesome
+            name={'search'}
+            size={24}
+            color="black"
+            style={styles.searchIcon}
+          />
+        </TouchableOpacity>
       </View>
       {/* </TouchableWithoutFeedback> */}
       <View style={styles.buttonList}>
