@@ -1,16 +1,70 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Linking,
+} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { checkImageURL } from '../utils/checkImageURL';
+import {checkImageURL} from '../utils/checkImageURL';
+import Qualifications from './Qualifications';
+import Tabs from './Tabs';
+import About from './About';
+
+const tabs = ['About', 'Qualifications', 'Responsibilities'];
 const JobDetail = ({route, navigation}) => {
   //take the id then make request to job detail api
+
+  const [activeTab, setActiveTab] = useState(tabs[0]);
   const {job} = route.params;
+  //const tabs=[{"About":`${job?.job_description}`},{"Qualifications":`${job?.job_highlights.Qualifications}`},{"Responsibilities":`${job?.job_highlights.Responsibilities}`}];
+  //job_highlights.Qualifications
+  //job_highlights.Responsibilities
+  //job_description
   // console.warn(job);
+  // console.warn(tabs);
+  const displayTabContent = () => {
+    switch (activeTab) {
+      case 'Qualifications':
+        return (
+          <Qualifications
+            title="Qualifications"
+            points={job.job_highlights?.Qualifications ?? ['N/A']}
+          />
+        );
+
+      case 'About':
+        return <About info={job.job_description ?? 'No data provided'} />;
+
+      case 'Responsibilities':
+        return (
+          <Qualifications
+            title="Responsibilities"
+            points={job.job_highlights?.Responsibilities ?? ['N/A']}
+          />
+        );
+
+      default:
+        return null;
+    }
+  };
+  const handleApplyButtonClick = () => {
+    const applyLink = job?.job_apply_link;
+    if (applyLink) {
+      // Open the apply link in the device's default browser
+      Linking.openURL(applyLink);
+    } else {
+      // Handle the case where no apply link is available
+      console.warn('No apply link provided for this job.');
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.head}>
-        {/* <Feather name={'arrow-left'} size={24} color="black" /> */}
         <Feather name={'share-2'} size={24} color="black" />
       </View>
       <View style={styles.section1}>
@@ -35,27 +89,12 @@ const JobDetail = ({route, navigation}) => {
           {job.job_country}
         </Text>
       </View>
-      <View style={styles.buttonList}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>About</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Qualifications</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Responsibilities</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.section2}>
-        <Text style={styles.bold}>About the job:</Text>
-        <Text>Overview</Text>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium,
-          at nemo. Blanditiis, dolor corporis explicabo doloribus veniam dolorum
-          itaque perspiciatis nostrum magni expedita molestias atque ratione
-          laboriosam dolores cupiditate iusto!
-        </Text>
-      </View>
+      <ScrollView>
+        <View style={styles.buttonList}>
+          <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+        </View>
+        {displayTabContent()}
+      </ScrollView>
       <View style={styles.footer}>
         <Feather
           style={styles.footerIcon}
@@ -63,7 +102,10 @@ const JobDetail = ({route, navigation}) => {
           size={24}
           color="#E07A5F"
         />
-        <TouchableOpacity style={styles.footerBtn}>
+        {/* job_apply_link */}
+        <TouchableOpacity
+          style={styles.footerBtn}
+          onPress={handleApplyButtonClick}>
           <Text style={styles.footerText}>Apply for job</Text>
         </TouchableOpacity>
       </View>
@@ -74,7 +116,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
   },
   head: {
     flexDirection: 'row',
@@ -96,6 +138,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    marginTop: 6,
   },
   button: {
     alignItems: 'center',
@@ -109,12 +152,12 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: 'bold',
     color: 'black',
-    fontSize:20,
-    padding:10
+    fontSize: 20,
+    padding: 10,
   },
-  companyLocation:{
-    fontSize:16,
-    marginTop:2
+  companyLocation: {
+    fontSize: 14,
+    marginTop: 2,
   },
   locationIcon: {
     width: 4,
@@ -132,6 +175,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     margin: 10,
     width: '95%',
+    // position: 'absolute',
+    // bottom: 0,
   },
   footerIcon: {
     padding: 10,
@@ -141,8 +186,8 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: 'white',
-    fontWeight:'bold',
-    fontSize:18
+    fontWeight: 'bold',
+    fontSize: 18,
   },
   footerBtn: {
     backgroundColor: '#E07A5F',
